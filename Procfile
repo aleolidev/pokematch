@@ -1,0 +1,1 @@
+web: gunicorn poketitive.wsgi --log-file -

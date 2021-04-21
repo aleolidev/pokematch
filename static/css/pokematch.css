@@ -1,0 +1,88 @@
+.btn-tag {
+    border-radius: 0.25rem;
+    color: white;
+    cursor: default;
+}
+
+.btn-tag:active {
+    -moz-box-shadow:    inset 0 0 0px white;
+    -webkit-box-shadow: inset 0 0 0px white;
+    box-shadow:         inset 0 0 0px white;
+    color: white;
+}
+
+.normal {
+    background-color: rgb(168, 168, 120);
+}
+
+.flying {
+    background-color: rgb(72, 208, 164);
+}
+
+.fire {
+    background-color: rgb(220, 95, 52);
+}
+
+.psychic {
+    background-color: rgb(249, 104, 169);
+}
+
+.water {
+    background-color: rgb(63, 164, 245);
+}
+
+.bug {
+    background-color: rgb(165, 231, 75);
+}
+
+.grass {
+    background-color: rgb(106, 228, 88);
+}
+
+.rock {
+    background-color: rgb(171, 132, 80);
+}
+
+.electric {
+    background-color: rgb(233, 200, 67);
+}
+
+.ghost {
+    background-color: rgb(162, 104, 196);
+}
+
+.ice {
+    background-color: rgb(104, 215, 234);
+}
+
+.dark {
+    background-color: rgb(142, 94, 91);
+}
+
+.fighting {
+    background-color: rgb(223, 55, 55);
+}
+
+.dragon {
+    background-color: rgb(170, 84, 222);
+}
+
+.poison {
+    background-color: rgb(217, 107, 228);
+}
+
+.steel {
+    background-color: rgb(143, 153, 167);
+}
+
+.ground {
+    background-color: rgb(216, 160, 105);
+}
+
+.fairy {
+    background-color: rgb(254, 167, 204);
+}
+
+.hidden-ab {
+    background-color: rgb(133, 133, 133);
+}
