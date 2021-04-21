@@ -69,7 +69,13 @@ def parse_name(raw_name):
     player_mon_name = raw_name
     if re.match('^Mega ', player_mon_name) is not None or re.match('^Primal ', player_mon_name) is not None:
         player_mon_name = re.sub(r'(\w+) (\w+)', r'\2 \1', player_mon_name)
-    player_mon_name = player_mon_name.lower().replace(' ', '-')
+    if re.match('^Alolan ', player_mon_name) is not None:
+        player_mon_name = re.sub(r'(\w+) (\w+)', r'\2 Alola', player_mon_name)
+    if re.match('^Galarian ', player_mon_name) is not None:
+        player_mon_name = re.sub(r'(\w+) (\w+)', r'\2 Galar', player_mon_name)
+    if re.match('^(\w+) (\w+) Form', player_mon_name) is not None:
+        player_mon_name = re.sub(r'(\w+) (\w+) (\w+)', r'\1 \2', player_mon_name)
+    player_mon_name = player_mon_name.lower().replace(' ', '-').replace('♀', '-f').replace('♂', '-m').replace("'", "")
     return player_mon_name
 
 def get_base_stats(mon_name, mon_struct):
