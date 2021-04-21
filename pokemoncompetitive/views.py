@@ -33,7 +33,7 @@ def index(request):
             # get_moves(player_mon_name, player_struct)
 
             # Get Icon
-            player_struct['icon'] = getattr(player_mon_name.sprites.versions, "generation-vii").icons.front_default
+            player_struct['icon'] = getattr(player_mon_name.sprites.versions, "generation-viii").icons.front_default
 
         # Process Target Mon POST
         target_mon_name = request.POST.get("targetMon", None)
