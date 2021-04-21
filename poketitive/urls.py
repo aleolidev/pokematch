@@ -11,6 +11,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name="index"),
     # path('', views.showmons, name='showmons')
-] +static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+]
 
-# urlpatterns += staticfiles_urlpatterns()
+urlpatterns += staticfiles_urlpatterns()
+# urlpatterns += +static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
