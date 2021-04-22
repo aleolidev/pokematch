@@ -19,21 +19,19 @@ def index(request):
 
 
     if request.method == "POST":
-        name_index = {mon["beauty_name"].replace('-', ' '): i for i, mon in enumerate(data)}
+        name_index = {mon["beauty_name"]: i for i, mon in enumerate(data)}
         
         # Process Player Mon POST
         player_mon_name = request.POST.get("playerMon", None)
         data_index = name_index.get(player_mon_name)
         if data_index is not None:
             player_struct = data[data_index]
-            player_struct["beauty_name"].replace('-', ' ')
 
         # Process Target Mon POST
         target_mon_name = request.POST.get("targetMon", None)
         data_index = name_index.get(target_mon_name)
         if data_index is not None:
             target_struct = data[data_index]
-            target_struct["beauty_name"].replace('-', ' ')
 
     return render(request, "pokemoncompetitive/base.html", {
         "data": data,

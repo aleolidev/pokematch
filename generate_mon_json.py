@@ -136,7 +136,7 @@ with open('C:/Users/inmor/Desktop/data.json', 'w') as outfile:
     api_data = (requests.get("https://pokeapi.co/api/v2/pokemon?offset=0&limit=9999")).json()
     
     counter = 0  # Failed in 812
-    start_offset = 812  # By if it fails
+    start_offset = 0  # By if it fails
     pbar = progressbar.ProgressBar(maxval=api_data['count'])
     pbar.start()
 
