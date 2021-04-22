@@ -1,301 +1,305 @@
 {% extends 'pokemoncompetitive/index.html' %}
 
 {% block pMon %} 
-    <input type="text" list="monlist" class="form-control" id="playerMon" name="playerMon" aria-describedby="Choose the Player Pokémon" placeholder="Player Pokémon" value="{{ orig_p_name }}" onfocus=this.value=''>
+    <input type="text" list="monlist" class="form-control" id="playerMon" name="playerMon" aria-describedby="Choose the Player Pokémon" placeholder="Player Pokémon" value="{{ player_struct.beauty_name }}" onfocus=this.value=''>
     <datalist id="monlist">
-        {% for mon_names in showmons %}
-            <option value="{{ mon_names.name }}">
+        {% for mons in data %}
+            <option value="{{ mons.beauty_name }}">
         {% endfor %}
     </datalist>
 {% endblock %}
 
 {% block tMon %} 
-    <input type="text" list="monlist" class="form-control" id="targetMon" name="targetMon" aria-describedby="Choose the Enemy Pokémon" placeholder="Enemy Pokémon" value="{{ orig_t_name }}" onfocus=this.value=''>
+    <input type="text" list="monlist" class="form-control" id="targetMon" name="targetMon" aria-describedby="Choose the Enemy Pokémon" placeholder="Enemy Pokémon" value="{{ target_struct.beauty_name }}" onfocus=this.value=''>
     <datalist id="monlist">
-        {% for mon_names in showmons %}
-            <option value="{{ mon_names.name }}">
+        {% for mons in data %}
+            <option value="{{ mons.beauty_name }}">
         {% endfor %}
     </datalist>
 {% endblock %}
 
 {% block pData %}
-    <div class="pb-4" style="display: {{ player_struct.display }};">
-        <img src="{{ player_struct.icon }}" class="align-middle"/>
-        <label for="playerMon" class="align-bottom m-0"> {{ orig_p_name }}</label>
-        <!-- HP -->
-        <div class="row justify-content-center pt-1" style="display: flex; align-items: center;">
-            <div class="col-2 col-lg-2 px-0" style="margin: 0; padding-right: 1em; text-align: right; color: #999;">HP</div>
-            <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: left;">{{ player_struct.hp }}</div>
-            <div class="col-4 col-lg-6 pl-3" style="margin: 0; padding: 0;">
-                <div class="progress" style="margin: 0; padding: 0;">
-                    <div class="progress-bar" role="progressbar" style="background-color: {{ player_struct.hex_hp }}!important; width: {{ player_struct.pct_hp }}%" aria-valuenow="{{ player_struct.pct_hp }}" aria-valuemin="0" aria-valuemax="100"></div>
+    <div class="col-sm-10 col-md-10 col-lg-5 align-middle p-0 pb-2 pt-4" style="display: {{ player_struct.display }};">
+        <div class="pb-4">
+            <img src="{{ player_struct.icon }}" class="align-middle"/>
+            <label for="playerMon" class="align-bottom m-0"> {{ player_struct.beauty_name }}</label>
+            <!-- HP -->
+            <div class="row justify-content-center pt-1" style="display: flex; align-items: center;">
+                <div class="col-2 col-lg-2 px-0" style="margin: 0; padding-right: 1em; text-align: right; color: #999;">HP</div>
+                <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: left;">{{ player_struct.hp }}</div>
+                <div class="col-4 col-lg-6 pl-3" style="margin: 0; padding: 0;">
+                    <div class="progress" style="margin: 0; padding: 0;">
+                        <div class="progress-bar" role="progressbar" style="background-color: {{ player_struct.hex_hp }}!important; width: {{ player_struct.pct_hp }}%" aria-valuenow="{{ player_struct.pct_hp }}" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
                 </div>
+                <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: right; color: #999;">{{ player_struct.min_hp }}</div>
+                <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: left;">{{ player_struct.max_hp }}</div>
             </div>
-            <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: right; color: #999;">{{ player_struct.min_hp }}</div>
-            <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: left;">{{ player_struct.max_hp }}</div>
-        </div>
-    
-        <!-- Attack -->
-        <div class="row justify-content-center pt-1" style="display: flex; align-items: center;">
-            <div class="col-2 col-lg-2 px-0" style="margin: 0; padding-right: 1em; text-align: right; color: #999;">ATK</div>
-            <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: left;">{{ player_struct.atk }}</div>
-            <div class="col-4 col-lg-6 pl-3" style="margin: 0; padding: 0;">
-                <div class="progress" style="margin: 0; padding: 0;">
-                    <div class="progress-bar" role="progressbar" style="background-color: {{ player_struct.hex_atk }}!important; width: {{ player_struct.pct_atk }}%" aria-valuenow="{{ player_struct.pct_atk }}" aria-valuemin="0" aria-valuemax="100"></div>
+        
+            <!-- Attack -->
+            <div class="row justify-content-center pt-1" style="display: flex; align-items: center;">
+                <div class="col-2 col-lg-2 px-0" style="margin: 0; padding-right: 1em; text-align: right; color: #999;">ATK</div>
+                <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: left;">{{ player_struct.atk }}</div>
+                <div class="col-4 col-lg-6 pl-3" style="margin: 0; padding: 0;">
+                    <div class="progress" style="margin: 0; padding: 0;">
+                        <div class="progress-bar" role="progressbar" style="background-color: {{ player_struct.hex_atk }}!important; width: {{ player_struct.pct_atk }}%" aria-valuenow="{{ player_struct.pct_atk }}" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
                 </div>
+                <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: right; color: #999;">{{ player_struct.min_atk }}</div>
+                <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: left;">{{ player_struct.max_atk }}</div>
             </div>
-            <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: right; color: #999;">{{ player_struct.min_atk }}</div>
-            <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: left;">{{ player_struct.max_atk }}</div>
-        </div>
-    
-        <!-- DEF -->
-        <div class="row justify-content-center pt-1" style="display: flex; align-items: center;">
-            <div class="col-2 col-lg-2 px-0" style="margin: 0; padding-right: 1em; text-align: right; color: #999;">DEF</div>
-            <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: left;">{{ player_struct.deff }}</div>
-            <div class="col-4 col-lg-6 pl-3" style="margin: 0; padding: 0;">
-                <div class="progress" style="margin: 0; padding: 0;">
-                    <div class="progress-bar" role="progressbar" style="background-color: {{ player_struct.hex_deff }}!important; width: {{ player_struct.pct_deff }}%" aria-valuenow="{{ player_struct.pct_deff }}" aria-valuemin="0" aria-valuemax="100"></div>
+        
+            <!-- DEF -->
+            <div class="row justify-content-center pt-1" style="display: flex; align-items: center;">
+                <div class="col-2 col-lg-2 px-0" style="margin: 0; padding-right: 1em; text-align: right; color: #999;">DEF</div>
+                <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: left;">{{ player_struct.deff }}</div>
+                <div class="col-4 col-lg-6 pl-3" style="margin: 0; padding: 0;">
+                    <div class="progress" style="margin: 0; padding: 0;">
+                        <div class="progress-bar" role="progressbar" style="background-color: {{ player_struct.hex_deff }}!important; width: {{ player_struct.pct_deff }}%" aria-valuenow="{{ player_struct.pct_deff }}" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
                 </div>
+                <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: right; color: #999;">{{ player_struct.min_deff }}</div>
+                <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: left;">{{ player_struct.max_deff }}</div>
             </div>
-            <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: right; color: #999;">{{ player_struct.min_deff }}</div>
-            <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: left;">{{ player_struct.max_deff }}</div>
-        </div>
-    
-        <!-- SP.ATK -->
-        <div class="row justify-content-center pt-1" style="display: flex; align-items: center;">
-            <div class="col-2 col-lg-2 px-0" style="margin: 0; padding-right: 1em; text-align: right; color: #999;">SP.ATK</div>
-            <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: left;">{{ player_struct.sp_atk }}</div>
-            <div class="col-4 col-lg-6 pl-3" style="margin: 0; padding: 0;">
-                <div class="progress" style="margin: 0; padding: 0;">
-                    <div class="progress-bar" role="progressbar" style="background-color: {{ player_struct.hex_sp_atk }}!important; width: {{ player_struct.pct_sp_atk }}%" aria-valuenow="{{ player_struct.pct_sp_atk }}" aria-valuemin="0" aria-valuemax="100"></div>
+        
+            <!-- SP.ATK -->
+            <div class="row justify-content-center pt-1" style="display: flex; align-items: center;">
+                <div class="col-2 col-lg-2 px-0" style="margin: 0; padding-right: 1em; text-align: right; color: #999;">SP.ATK</div>
+                <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: left;">{{ player_struct.sp_atk }}</div>
+                <div class="col-4 col-lg-6 pl-3" style="margin: 0; padding: 0;">
+                    <div class="progress" style="margin: 0; padding: 0;">
+                        <div class="progress-bar" role="progressbar" style="background-color: {{ player_struct.hex_sp_atk }}!important; width: {{ player_struct.pct_sp_atk }}%" aria-valuenow="{{ player_struct.pct_sp_atk }}" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
                 </div>
+                <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: right; color: #999;">{{ player_struct.min_sp_atk }}</div>
+                <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: left;">{{ player_struct.max_sp_atk }}</div>
             </div>
-            <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: right; color: #999;">{{ player_struct.min_sp_atk }}</div>
-            <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: left;">{{ player_struct.max_sp_atk }}</div>
-        </div>
-    
-        <!-- SP.DEF -->
-        <div class="row justify-content-center pt-1" style="display: flex; align-items: center;">
-            <div class="col-2 col-lg-2 px-0" style="margin: 0; padding-right: 1em; text-align: right; color: #999;">SP.DEF</div>
-            <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: left;">{{ player_struct.sp_def }}</div>
-            <div class="col-4 col-lg-6 pl-3" style="margin: 0; padding: 0;">
-                <div class="progress" style="margin: 0; padding: 0;">
-                    <div class="progress-bar" role="progressbar" style="background-color: {{ player_struct.hex_sp_def }}!important; width: {{ player_struct.pct_sp_def }}%" aria-valuenow="{{ player_struct.pct_sp_def }}" aria-valuemin="0" aria-valuemax="100"></div>
+        
+            <!-- SP.DEF -->
+            <div class="row justify-content-center pt-1" style="display: flex; align-items: center;">
+                <div class="col-2 col-lg-2 px-0" style="margin: 0; padding-right: 1em; text-align: right; color: #999;">SP.DEF</div>
+                <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: left;">{{ player_struct.sp_def }}</div>
+                <div class="col-4 col-lg-6 pl-3" style="margin: 0; padding: 0;">
+                    <div class="progress" style="margin: 0; padding: 0;">
+                        <div class="progress-bar" role="progressbar" style="background-color: {{ player_struct.hex_sp_def }}!important; width: {{ player_struct.pct_sp_def }}%" aria-valuenow="{{ player_struct.pct_sp_def }}" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
                 </div>
+                <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: right; color: #999;">{{ player_struct.min_sp_def }}</div>
+                <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: left;">{{ player_struct.max_sp_def }}</div>
             </div>
-            <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: right; color: #999;">{{ player_struct.min_sp_def }}</div>
-            <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: left;">{{ player_struct.max_sp_def }}</div>
-        </div>
-    
-        <!-- SPE -->
-        <div class="row justify-content-center pt-1" style="display: flex; align-items: center;">
-            <div class="col-2 col-lg-2 px-0" style="margin: 0; padding-right: 1em; text-align: right; color: #999;">SPEED</div>
-            <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: left;">{{ player_struct.speed }}</div>
-            <div class="col-4 col-lg-6 pl-3" style="margin: 0; padding: 0;">
-                <div class="progress" style="margin: 0; padding: 0;">
-                    <div class="progress-bar" role="progressbar" style="background-color: {{ player_struct.hex_speed }}!important; width: {{ player_struct.pct_speed }}%" aria-valuenow="{{ player_struct.pct_speed }}" aria-valuemin="0" aria-valuemax="100"></div>
+        
+            <!-- SPE -->
+            <div class="row justify-content-center pt-1" style="display: flex; align-items: center;">
+                <div class="col-2 col-lg-2 px-0" style="margin: 0; padding-right: 1em; text-align: right; color: #999;">SPEED</div>
+                <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: left;">{{ player_struct.speed }}</div>
+                <div class="col-4 col-lg-6 pl-3" style="margin: 0; padding: 0;">
+                    <div class="progress" style="margin: 0; padding: 0;">
+                        <div class="progress-bar" role="progressbar" style="background-color: {{ player_struct.hex_speed }}!important; width: {{ player_struct.pct_speed }}%" aria-valuenow="{{ player_struct.pct_speed }}" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
                 </div>
+                <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: right; color: #999;">{{ player_struct.min_speed }}</div>
+                <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: left;">{{ player_struct.max_speed }}</div>
             </div>
-            <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: right; color: #999;">{{ player_struct.min_speed }}</div>
-            <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: left;">{{ player_struct.max_speed }}</div>
-        </div>
-        <!-- TOTAL -->
-        <div class="row justify-content-center pt-1" style="display: flex; align-items: center;">
-            <div class="col-2 col-lg-2 px-0" style="margin: 0; padding-right: 1em; text-align: right; color: #999;"><b>TOTAL</b></div>
-            <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: left;"><b>{{ player_struct.total }}</b></div>
-            <div class="col-4 col-lg-6 pl-3" style="margin: 0; padding: 0;">
-                <!-- <div class="progress" style="margin: 0; padding: 0;">
-                    <div class="progress-bar bg-success" role="progressbar" style="width: {{ player_struct.pct_speed }}%" aria-valuenow="{{ player_struct.pct_speed }}" aria-valuemin="0" aria-valuemax="100"></div>
-                </div> -->
+            <!-- TOTAL -->
+            <div class="row justify-content-center pt-1" style="display: flex; align-items: center;">
+                <div class="col-2 col-lg-2 px-0" style="margin: 0; padding-right: 1em; text-align: right; color: #999;"><b>TOTAL</b></div>
+                <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: left;"><b>{{ player_struct.total }}</b></div>
+                <div class="col-4 col-lg-6 pl-3" style="margin: 0; padding: 0;">
+                    <!-- <div class="progress" style="margin: 0; padding: 0;">
+                        <div class="progress-bar bg-success" role="progressbar" style="width: {{ player_struct.pct_speed }}%" aria-valuenow="{{ player_struct.pct_speed }}" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div> -->
+                </div>
+                <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: right; color: #999;"><b>MIN</b></div>
+                <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: left;"><b>MAX</b></div>
             </div>
-            <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: right; color: #999;"><b>MIN</b></div>
-            <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: left;"><b>MAX</b></div>
-        </div>
 
-        <!-- TYPES -->
-        <hr style="color: #fff!important;">
-        <div class="row justify-content-center" style="display: flex; align-items: center;">
-            <div class="col-12 col-lg-12" style="margin: 0; padding-right: 1em; text-align: center; color: #999;"><b>Type/s</b></div>
-            {% for type in player_struct.types %}
-                <div class="col-3 col-lg-3 btn-tag {{ type }} p-1 mt-2" style="margin-right: 1em; text-align: center; text-transform: capitalize;">{{ type }}</div>
-            {% endfor %}
-        </div>
-        <!-- WEAKNESSES -->
-        <hr style="color: #fff!important; display: {{ player_struct.disp_weaknesses }};">
-        <div class="row justify-content-center" style="display: {{ player_struct.disp_weaknesses }}; align-items: center;">
-            <div class="col-12 col-lg-12" style="margin: 0; padding-right: 1em; text-align: center; color: #999;"><b>Weaknesses</b></div>
-            {% for type in player_struct.weaknesses %}
-                <div class="col-3 col-lg-3 btn-tag {{ type.name }} p-1 mt-2 mx-1" style="margin-right: 1em; text-align: center;"><span style="text-transform: capitalize;">{{ type.name }}</span> <b>x{{ type.multiple }}</b></div>
-            {% endfor %}
-        </div>
-        <!-- RESISTANCE -->
-        <hr style="color: #fff!important; display: {{ player_struct.disp_resistance }};">
-        <div class="row justify-content-center" style="display: {{ player_struct.disp_resistance }}; align-items: center;">
-            <div class="col-12 col-lg-12" style="margin: 0; padding-right: 1em; text-align: center; color: #999;"><b>Resistance</b></div>
-            {% for type in player_struct.resistance %}
-                <div class="col-3 col-lg-3 btn-tag {{ type.name }} p-1 mt-2 mx-1" style="margin-right: 1em; text-align: center;"><span style="text-transform: capitalize;">{{ type.name }}</span> <b>x{{ type.multiple }}</b></div>
-            {% endfor %}
-        </div>
-        <!-- NO EFFECT -->
-        <hr style="color: #fff!important; display: {{ player_struct.disp_noeffect }};">
-        <div class="row justify-content-center" style="display: {{ player_struct.disp_noeffect }}; align-items: center;">
-            <div class="col-12 col-lg-12" style="margin: 0; padding-right: 1em; text-align: center; color: #999;"><b>No Effect</b></div>
-            {% for type in player_struct.noeffect %}
-                <div class="col-3 col-lg-3 btn-tag {{ type.name }} p-1 mt-2 mx-1" style="margin-right: 1em; text-align: center;"><span style="text-transform: capitalize;">{{ type.name }}</span> <b>x{{ type.multiple }}</b></div>
-            {% endfor %}
-        </div>
+            <!-- TYPES -->
+            <hr style="color: #fff!important;">
+            <div class="row justify-content-center" style="display: flex; align-items: center;">
+                <div class="col-12 col-lg-12" style="margin: 0; padding-right: 1em; text-align: center; color: #999;"><b>Type/s</b></div>
+                {% for type in player_struct.types %}
+                    <div class="col-3 col-lg-3 btn-tag {{ type }} p-1 mt-2" style="margin-right: 1em; text-align: center; text-transform: capitalize;">{{ type }}</div>
+                {% endfor %}
+            </div>
+            <!-- WEAKNESSES -->
+            <hr style="color: #fff!important; display: {{ player_struct.disp_weaknesses }};">
+            <div class="row justify-content-center" style="display: {{ player_struct.disp_weaknesses }}; align-items: center;">
+                <div class="col-12 col-lg-12" style="margin: 0; padding-right: 1em; text-align: center; color: #999;"><b>Weaknesses</b></div>
+                {% for type in player_struct.weaknesses %}
+                    <div class="col-3 col-lg-3 btn-tag {{ type.name }} p-1 mt-2 mx-1" style="margin-right: 1em; text-align: center;"><span style="text-transform: capitalize;">{{ type.name }}</span> <b>x{{ type.multiple }}</b></div>
+                {% endfor %}
+            </div>
+            <!-- RESISTANCE -->
+            <hr style="color: #fff!important; display: {{ player_struct.disp_resistance }};">
+            <div class="row justify-content-center" style="display: {{ player_struct.disp_resistance }}; align-items: center;">
+                <div class="col-12 col-lg-12" style="margin: 0; padding-right: 1em; text-align: center; color: #999;"><b>Resistance</b></div>
+                {% for type in player_struct.resistance %}
+                    <div class="col-3 col-lg-3 btn-tag {{ type.name }} p-1 mt-2 mx-1" style="margin-right: 1em; text-align: center;"><span style="text-transform: capitalize;">{{ type.name }}</span> <b>x{{ type.multiple }}</b></div>
+                {% endfor %}
+            </div>
+            <!-- NO EFFECT -->
+            <hr style="color: #fff!important; display: {{ player_struct.disp_noeffect }};">
+            <div class="row justify-content-center" style="display: {{ player_struct.disp_noeffect }}; align-items: center;">
+                <div class="col-12 col-lg-12" style="margin: 0; padding-right: 1em; text-align: center; color: #999;"><b>No Effect</b></div>
+                {% for type in player_struct.noeffect %}
+                    <div class="col-3 col-lg-3 btn-tag {{ type.name }} p-1 mt-2 mx-1" style="margin-right: 1em; text-align: center;"><span style="text-transform: capitalize;">{{ type.name }}</span> <b>x{{ type.multiple }}</b></div>
+                {% endfor %}
+            </div>
 
 
-        <!-- ABILITIES -->
-        <hr style="color: #fff!important;">
-        <div class="row justify-content-center" style="display: flex; align-items: center;">
-            <div class="col-12 col-lg-12" style="margin: 0; padding-right: 1em; text-align: center; color: #999;"><b>Abilities</b></div>
-            {% for ability in player_struct.abilities %}
-                <span class="text-justify mt-2" style="display: inline-block;">
-                    <span style="text-transform: capitalize;"><b>{{ability.name}}</b></span><div class="btn-tag hidden-ab p-1 mt-2 mx-1" style="margin-right: 1em; text-align: center; display: {{ ability.is_hidden }};">Hidden</div><span style="color: #999;">: {{ability.short_description}}</span>
-                </span>
-            {% endfor %}
+            <!-- ABILITIES -->
+            <hr style="color: #fff!important;">
+            <div class="row justify-content-center" style="display: flex; align-items: center;">
+                <div class="col-12 col-lg-12" style="margin: 0; padding-right: 1em; text-align: center; color: #999;"><b>Abilities</b></div>
+                {% for ability in player_struct.abilities %}
+                    <span class="text-justify mt-2" style="display: inline-block;">
+                        <span style="text-transform: capitalize;"><b>{{ability.name}}</b></span><div class="btn-tag hidden-ab p-1 mt-2 mx-1" style="margin-right: 1em; text-align: center; display: {{ ability.is_hidden }};">Hidden</div><span style="color: #999;">: {{ability.short_description}}</span>
+                    </span>
+                {% endfor %}
+            </div>
         </div>
     </div>
 {% endblock %}
 
-{% block tData %}
-    <div class="pb-4" style="display: {{ target_struct.display }};">
-        <img src="{{ target_struct.icon }}" class="align-middle"/>
-        <label for="targetMon" class="align-bottom m-0"> {{ orig_t_name }}</label>
-        <!-- HP -->
-        <div class="row justify-content-center pt-1" style="display: flex; align-items: center;">
-            <div class="col-2 col-lg-2 px-0" style="margin: 0; padding-right: 1em; text-align: right; color: #999;">HP</div>
-            <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: left;">{{ target_struct.hp }}</div>
-            <div class="col-4 col-lg-6 pl-3" style="margin: 0; padding: 0;">
-                <div class="progress" style="margin: 0; padding: 0;">
-                    <div class="progress-bar" role="progressbar" style="background-color: {{ target_struct.hex_hp }}!important; width: {{ target_struct.pct_hp }}%" aria-valuenow="{{ target_struct.pct_hp }}" aria-valuemin="0" aria-valuemax="100"></div>
+{% block tData %} 
+    <div class="col-sm-10 col-md-10 col-lg-5 align-middle p-0 pb-2 pt-4" style="display: {{ target_struct.display }};">
+        <div class="pb-4">
+            <img src="{{ target_struct.icon }}" class="align-middle"/>
+            <label for="targetMon" class="align-bottom m-0"> {{ target_struct.beauty_name }}</label>
+            <!-- HP -->
+            <div class="row justify-content-center pt-1" style="display: flex; align-items: center;">
+                <div class="col-2 col-lg-2 px-0" style="margin: 0; padding-right: 1em; text-align: right; color: #999;">HP</div>
+                <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: left;">{{ target_struct.hp }}</div>
+                <div class="col-4 col-lg-6 pl-3" style="margin: 0; padding: 0;">
+                    <div class="progress" style="margin: 0; padding: 0;">
+                        <div class="progress-bar" role="progressbar" style="background-color: {{ target_struct.hex_hp }}!important; width: {{ target_struct.pct_hp }}%" aria-valuenow="{{ target_struct.pct_hp }}" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
                 </div>
+                <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: right; color: #999;">{{ target_struct.min_hp }}</div>
+                <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: left;">{{ target_struct.max_hp }}</div>
             </div>
-            <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: right; color: #999;">{{ target_struct.min_hp }}</div>
-            <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: left;">{{ target_struct.max_hp }}</div>
-        </div>
-
-        <!-- Attack -->
-        <div class="row justify-content-center pt-1" style="display: flex; align-items: center;">
-            <div class="col-2 col-lg-2 px-0" style="margin: 0; padding-right: 1em; text-align: right; color: #999;">ATK</div>
-            <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: left;">{{ target_struct.atk }}</div>
-            <div class="col-4 col-lg-6 pl-3" style="margin: 0; padding: 0;">
-                <div class="progress" style="margin: 0; padding: 0;">
-                    <div class="progress-bar" role="progressbar" style="background-color: {{ target_struct.hex_atk }}!important; width: {{ target_struct.pct_atk }}%" aria-valuenow="{{ target_struct.pct_atk }}" aria-valuemin="0" aria-valuemax="100"></div>
+        
+            <!-- Attack -->
+            <div class="row justify-content-center pt-1" style="display: flex; align-items: center;">
+                <div class="col-2 col-lg-2 px-0" style="margin: 0; padding-right: 1em; text-align: right; color: #999;">ATK</div>
+                <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: left;">{{ target_struct.atk }}</div>
+                <div class="col-4 col-lg-6 pl-3" style="margin: 0; padding: 0;">
+                    <div class="progress" style="margin: 0; padding: 0;">
+                        <div class="progress-bar" role="progressbar" style="background-color: {{ target_struct.hex_atk }}!important; width: {{ target_struct.pct_atk }}%" aria-valuenow="{{ target_struct.pct_atk }}" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
                 </div>
+                <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: right; color: #999;">{{ target_struct.min_atk }}</div>
+                <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: left;">{{ target_struct.max_atk }}</div>
             </div>
-            <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: right; color: #999;">{{ target_struct.min_atk }}</div>
-            <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: left;">{{ target_struct.max_atk }}</div>
-        </div>
-
-        <!-- DEF -->
-        <div class="row justify-content-center pt-1" style="display: flex; align-items: center;">
-            <div class="col-2 col-lg-2 px-0" style="margin: 0; padding-right: 1em; text-align: right; color: #999;">DEF</div>
-            <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: left;">{{ target_struct.deff }}</div>
-            <div class="col-4 col-lg-6 pl-3" style="margin: 0; padding: 0;">
-                <div class="progress" style="margin: 0; padding: 0;">
-                    <div class="progress-bar" role="progressbar" style="background-color: {{ target_struct.hex_deff }}!important; width: {{ target_struct.pct_deff }}%" aria-valuenow="{{ target_struct.pct_deff }}" aria-valuemin="0" aria-valuemax="100"></div>
+        
+            <!-- DEF -->
+            <div class="row justify-content-center pt-1" style="display: flex; align-items: center;">
+                <div class="col-2 col-lg-2 px-0" style="margin: 0; padding-right: 1em; text-align: right; color: #999;">DEF</div>
+                <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: left;">{{ target_struct.deff }}</div>
+                <div class="col-4 col-lg-6 pl-3" style="margin: 0; padding: 0;">
+                    <div class="progress" style="margin: 0; padding: 0;">
+                        <div class="progress-bar" role="progressbar" style="background-color: {{ target_struct.hex_deff }}!important; width: {{ target_struct.pct_deff }}%" aria-valuenow="{{ target_struct.pct_deff }}" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
                 </div>
+                <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: right; color: #999;">{{ target_struct.min_deff }}</div>
+                <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: left;">{{ target_struct.max_deff }}</div>
             </div>
-            <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: right; color: #999;">{{ target_struct.min_deff }}</div>
-            <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: left;">{{ target_struct.max_deff }}</div>
-        </div>
-
-        <!-- SP.ATK -->
-        <div class="row justify-content-center pt-1" style="display: flex; align-items: center;">
-            <div class="col-2 col-lg-2 px-0" style="margin: 0; padding-right: 1em; text-align: right; color: #999;">SP.ATK</div>
-            <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: left;">{{ target_struct.sp_atk }}</div>
-            <div class="col-4 col-lg-6 pl-3" style="margin: 0; padding: 0;">
-                <div class="progress" style="margin: 0; padding: 0;">
-                    <div class="progress-bar" role="progressbar" style="background-color: {{ target_struct.hex_sp_atk }}!important; width: {{ target_struct.pct_sp_atk }}%" aria-valuenow="{{ target_struct.pct_sp_atk }}" aria-valuemin="0" aria-valuemax="100"></div>
+        
+            <!-- SP.ATK -->
+            <div class="row justify-content-center pt-1" style="display: flex; align-items: center;">
+                <div class="col-2 col-lg-2 px-0" style="margin: 0; padding-right: 1em; text-align: right; color: #999;">SP.ATK</div>
+                <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: left;">{{ target_struct.sp_atk }}</div>
+                <div class="col-4 col-lg-6 pl-3" style="margin: 0; padding: 0;">
+                    <div class="progress" style="margin: 0; padding: 0;">
+                        <div class="progress-bar" role="progressbar" style="background-color: {{ target_struct.hex_sp_atk }}!important; width: {{ target_struct.pct_sp_atk }}%" aria-valuenow="{{ target_struct.pct_sp_atk }}" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
                 </div>
+                <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: right; color: #999;">{{ target_struct.min_sp_atk }}</div>
+                <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: left;">{{ target_struct.max_sp_atk }}</div>
             </div>
-            <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: right; color: #999;">{{ target_struct.min_sp_atk }}</div>
-            <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: left;">{{ target_struct.max_sp_atk }}</div>
-        </div>
-
-        <!-- SP.DEF -->
-        <div class="row justify-content-center pt-1" style="display: flex; align-items: center;">
-            <div class="col-2 col-lg-2 px-0" style="margin: 0; padding-right: 1em; text-align: right; color: #999;">SP.DEF</div>
-            <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: left;">{{ target_struct.sp_def }}</div>
-            <div class="col-4 col-lg-6 pl-3" style="margin: 0; padding: 0;">
-                <div class="progress" style="margin: 0; padding: 0;">
-                    <div class="progress-bar" role="progressbar" style="background-color: {{ target_struct.hex_sp_def }}!important; width: {{ target_struct.pct_sp_def }}%" aria-valuenow="{{ target_struct.pct_sp_def }}" aria-valuemin="0" aria-valuemax="100"></div>
+        
+            <!-- SP.DEF -->
+            <div class="row justify-content-center pt-1" style="display: flex; align-items: center;">
+                <div class="col-2 col-lg-2 px-0" style="margin: 0; padding-right: 1em; text-align: right; color: #999;">SP.DEF</div>
+                <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: left;">{{ target_struct.sp_def }}</div>
+                <div class="col-4 col-lg-6 pl-3" style="margin: 0; padding: 0;">
+                    <div class="progress" style="margin: 0; padding: 0;">
+                        <div class="progress-bar" role="progressbar" style="background-color: {{ target_struct.hex_sp_def }}!important; width: {{ target_struct.pct_sp_def }}%" aria-valuenow="{{ target_struct.pct_sp_def }}" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
                 </div>
+                <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: right; color: #999;">{{ target_struct.min_sp_def }}</div>
+                <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: left;">{{ target_struct.max_sp_def }}</div>
             </div>
-            <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: right; color: #999;">{{ target_struct.min_sp_def }}</div>
-            <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: left;">{{ target_struct.max_sp_def }}</div>
-        </div>
-
-        <!-- SPE -->
-        <div class="row justify-content-center pt-1" style="display: flex; align-items: center;">
-            <div class="col-2 col-lg-2 px-0" style="margin: 0; padding-right: 1em; text-align: right; color: #999;">SPEED</div>
-            <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: left;">{{ target_struct.speed }}</div>
-            <div class="col-4 col-lg-6 pl-3" style="margin: 0; padding: 0;">
-                <div class="progress" style="margin: 0; padding: 0;">
-                    <div class="progress-bar" role="progressbar" style="background-color: {{ target_struct.hex_speed }}!important; width: {{ target_struct.pct_speed }}%" aria-valuenow="{{ target_struct.pct_speed }}" aria-valuemin="0" aria-valuemax="100"></div>
+        
+            <!-- SPE -->
+            <div class="row justify-content-center pt-1" style="display: flex; align-items: center;">
+                <div class="col-2 col-lg-2 px-0" style="margin: 0; padding-right: 1em; text-align: right; color: #999;">SPEED</div>
+                <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: left;">{{ target_struct.speed }}</div>
+                <div class="col-4 col-lg-6 pl-3" style="margin: 0; padding: 0;">
+                    <div class="progress" style="margin: 0; padding: 0;">
+                        <div class="progress-bar" role="progressbar" style="background-color: {{ target_struct.hex_speed }}!important; width: {{ target_struct.pct_speed }}%" aria-valuenow="{{ target_struct.pct_speed }}" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
                 </div>
+                <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: right; color: #999;">{{ target_struct.min_speed }}</div>
+                <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: left;">{{ target_struct.max_speed }}</div>
             </div>
-            <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: right; color: #999;">{{ target_struct.min_speed }}</div>
-            <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: left;">{{ target_struct.max_speed }}</div>
-        </div>
-        <!-- TOTAL -->
-        <div class="row justify-content-center pt-1" style="display: flex; align-items: center;">
-            <div class="col-2 col-lg-2 px-0" style="margin: 0; padding-right: 1em; text-align: right; color: #999;"><b>TOTAL</b></div>
-            <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: left;"><b>{{ target_struct.total }}</b></div>
-            <div class="col-4 col-lg-6 pl-3" style="margin: 0; padding: 0;">
-                <!-- <div class="progress" style="margin: 0; padding: 0;">
-                    <div class="progress-bar bg-success" role="progressbar" style="width: {{ target_struct.pct_speed }}%" aria-valuenow="{{ target_struct.pct_speed }}" aria-valuemin="0" aria-valuemax="100"></div>
-                </div> -->
+            <!-- TOTAL -->
+            <div class="row justify-content-center pt-1" style="display: flex; align-items: center;">
+                <div class="col-2 col-lg-2 px-0" style="margin: 0; padding-right: 1em; text-align: right; color: #999;"><b>TOTAL</b></div>
+                <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: left;"><b>{{ target_struct.total }}</b></div>
+                <div class="col-4 col-lg-6 pl-3" style="margin: 0; padding: 0;">
+                    <!-- <div class="progress" style="margin: 0; padding: 0;">
+                        <div class="progress-bar bg-success" role="progressbar" style="width: {{ target_struct.pct_speed }}%" aria-valuenow="{{ target_struct.pct_speed }}" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div> -->
+                </div>
+                <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: right; color: #999;"><b>MIN</b></div>
+                <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: left;"><b>MAX</b></div>
             </div>
-            <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: right; color: #999;"><b>MIN</b></div>
-            <div class="col-2 col-lg-1" style="margin: 0; padding-right: 1em; text-align: left;"><b>MAX</b></div>
-        </div>
 
-        <!-- TYPES -->
-        <hr style="color: #fff!important;">
-        <div class="row justify-content-center" style="display: flex; align-items: center;">
-            <div class="col-12 col-lg-12" style="margin: 0; padding-right: 1em; text-align: center; color: #999;"><b>Type/s</b></div>
-            {% for type in target_struct.types %}
-                <div class="col-3 col-lg-3 btn-tag {{ type }} p-1 mt-2" style="margin-right: 1em; text-align: center; text-transform: capitalize;">{{ type }}</div>
-            {% endfor %}
-        </div>
-        <!-- WEAKNESSES -->
-        <hr style="color: #fff!important; display: {{ target_struct.disp_weaknesses }};">
-        <div class="row justify-content-center" style="display: {{ target_struct.disp_weaknesses }}; align-items: center;">
-            <div class="col-12 col-lg-12" style="margin: 0; padding-right: 1em; text-align: center; color: #999;"><b>Weaknesses</b></div>
-            {% for type in target_struct.weaknesses %}
-                <div class="col-3 col-lg-3 btn-tag {{ type.name }} p-1 mt-2 mx-1" style="margin-right: 1em; text-align: center;"><span style="text-transform: capitalize;">{{ type.name }}</span> <b>x{{ type.multiple }}</b></div>
-            {% endfor %}
-        </div>
-        <!-- RESISTANCE -->
-        <hr style="color: #fff!important; display: {{ target_struct.disp_resistance }};">
-        <div class="row justify-content-center" style="display: {{ target_struct.disp_resistance }}; align-items: center;">
-            <div class="col-12 col-lg-12" style="margin: 0; padding-right: 1em; text-align: center; color: #999;"><b>Resistance</b></div>
-            {% for type in target_struct.resistance %}
-                <div class="col-3 col-lg-3 btn-tag {{ type.name }} p-1 mt-2 mx-1" style="margin-right: 1em; text-align: center;"><span style="text-transform: capitalize;">{{ type.name }}</span> <b>x{{ type.multiple }}</b></div>
-            {% endfor %}
-        </div>
-        <!-- NO EFFECT -->
-        <hr style="color: #fff!important; display: {{ target_struct.disp_noeffect }};">
-        <div class="row justify-content-center" style="display: {{ target_struct.disp_noeffect }}; align-items: center;">
-            <div class="col-12 col-lg-12" style="margin: 0; padding-right: 1em; text-align: center; color: #999;"><b>No Effect</b></div>
-            {% for type in target_struct.noeffect %}
-                <div class="col-3 col-lg-3 btn-tag {{ type.name }} p-1 mt-2 mx-1" style="margin-right: 1em; text-align: center;"><span style="text-transform: capitalize;">{{ type.name }}</span> <b>x{{ type.multiple }}</b></div>
-            {% endfor %}
-        </div>
+            <!-- TYPES -->
+            <hr style="color: #fff!important;">
+            <div class="row justify-content-center" style="display: flex; align-items: center;">
+                <div class="col-12 col-lg-12" style="margin: 0; padding-right: 1em; text-align: center; color: #999;"><b>Type/s</b></div>
+                {% for type in target_struct.types %}
+                    <div class="col-3 col-lg-3 btn-tag {{ type }} p-1 mt-2" style="margin-right: 1em; text-align: center; text-transform: capitalize;">{{ type }}</div>
+                {% endfor %}
+            </div>
+            <!-- WEAKNESSES -->
+            <hr style="color: #fff!important; display: {{ target_struct.disp_weaknesses }};">
+            <div class="row justify-content-center" style="display: {{ target_struct.disp_weaknesses }}; align-items: center;">
+                <div class="col-12 col-lg-12" style="margin: 0; padding-right: 1em; text-align: center; color: #999;"><b>Weaknesses</b></div>
+                {% for type in target_struct.weaknesses %}
+                    <div class="col-3 col-lg-3 btn-tag {{ type.name }} p-1 mt-2 mx-1" style="margin-right: 1em; text-align: center;"><span style="text-transform: capitalize;">{{ type.name }}</span> <b>x{{ type.multiple }}</b></div>
+                {% endfor %}
+            </div>
+            <!-- RESISTANCE -->
+            <hr style="color: #fff!important; display: {{ target_struct.disp_resistance }};">
+            <div class="row justify-content-center" style="display: {{ target_struct.disp_resistance }}; align-items: center;">
+                <div class="col-12 col-lg-12" style="margin: 0; padding-right: 1em; text-align: center; color: #999;"><b>Resistance</b></div>
+                {% for type in target_struct.resistance %}
+                    <div class="col-3 col-lg-3 btn-tag {{ type.name }} p-1 mt-2 mx-1" style="margin-right: 1em; text-align: center;"><span style="text-transform: capitalize;">{{ type.name }}</span> <b>x{{ type.multiple }}</b></div>
+                {% endfor %}
+            </div>
+            <!-- NO EFFECT -->
+            <hr style="color: #fff!important; display: {{ target_struct.disp_noeffect }};">
+            <div class="row justify-content-center" style="display: {{ target_struct.disp_noeffect }}; align-items: center;">
+                <div class="col-12 col-lg-12" style="margin: 0; padding-right: 1em; text-align: center; color: #999;"><b>No Effect</b></div>
+                {% for type in target_struct.noeffect %}
+                    <div class="col-3 col-lg-3 btn-tag {{ type.name }} p-1 mt-2 mx-1" style="margin-right: 1em; text-align: center;"><span style="text-transform: capitalize;">{{ type.name }}</span> <b>x{{ type.multiple }}</b></div>
+                {% endfor %}
+            </div>
 
 
-        <!-- ABILITIES -->
-        <hr style="color: #fff!important;">
-        <div class="row justify-content-center" style="display: flex; align-items: center;">
-            <div class="col-12 col-lg-12" style="margin: 0; padding-right: 1em; text-align: center; color: #999;"><b>Abilities</b></div>
-            {% for ability in target_struct.abilities %}
-                <span class="text-justify mt-2" style="display: inline-block;">
-                    <span style="text-transform: capitalize;"><b>{{ability.name}}</b></span><div class="btn-tag hidden-ab p-1 mt-2 mx-1" style="margin-right: 1em; text-align: center; display: {{ ability.is_hidden }};">Hidden</div><span style="color: #999;">: {{ability.short_description}}</span>
-                </span>
-            {% endfor %}
+            <!-- ABILITIES -->
+            <hr style="color: #fff!important;">
+            <div class="row justify-content-center" style="display: flex; align-items: center;">
+                <div class="col-12 col-lg-12" style="margin: 0; padding-right: 1em; text-align: center; color: #999;"><b>Abilities</b></div>
+                {% for ability in target_struct.abilities %}
+                    <span class="text-justify mt-2" style="display: inline-block;">
+                        <span style="text-transform: capitalize;"><b>{{ability.name}}</b></span><div class="btn-tag hidden-ab p-1 mt-2 mx-1" style="margin-right: 1em; text-align: center; display: {{ ability.is_hidden }};">Hidden</div><span style="color: #999;">: {{ability.short_description}}</span>
+                    </span>
+                {% endfor %}
+            </div>
         </div>
     </div>
 {% endblock %}
