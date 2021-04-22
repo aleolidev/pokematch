@@ -25,10 +25,7 @@ def index(request):
         player_mon_name = request.POST.get("playerMon", None)
         data_index = name_index.get(player_mon_name)
         if data_index is not None:
-            # print("JSON: ", json.dumps(data[data_index]))
             player_struct = data[data_index]
-            # mon = pb.pokemon(player_struct["name"])
-            # player_struct["icon"] = getattr(mon.sprites.versions, "generation-viii").icons.front_default
 
         # Process Target Mon POST
         target_mon_name = request.POST.get("targetMon", None)
