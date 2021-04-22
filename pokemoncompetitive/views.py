@@ -39,8 +39,6 @@ def index(request):
         "target_struct":target_struct
     })
 
-
-
 #######
 # Old #
 #######
