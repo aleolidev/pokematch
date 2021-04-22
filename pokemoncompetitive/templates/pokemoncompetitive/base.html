@@ -142,7 +142,7 @@
             <div class="row justify-content-center" style="display: {{ player_struct.disp_noeffect }}; align-items: center;">
                 <div class="col-12 col-lg-12" style="margin: 0; padding-right: 1em; text-align: center; color: #999;"><b>No Effect</b></div>
                 {% for type in player_struct.noeffect %}
-                    <div class="col-3 col-lg-3 btn-tag {{ type.name }} p-1 mt-2 mx-1" style="margin-right: 1em; text-align: center;"><span style="text-transform: capitalize;">{{ type.name }}</span> <b>x{{ type.multiple }}</b></div>
+                    <div class="col-3 col-lg-3 btn-tag {{ type.name }} p-1 mt-2 mx-1" style="margin-right: 1em; text-align: center;"><span style="text-transform: capitalize;">{{ type.name }}</span></div>
                 {% endfor %}
             </div>
 
@@ -285,7 +285,7 @@
             <div class="row justify-content-center" style="display: {{ target_struct.disp_noeffect }}; align-items: center;">
                 <div class="col-12 col-lg-12" style="margin: 0; padding-right: 1em; text-align: center; color: #999;"><b>No Effect</b></div>
                 {% for type in target_struct.noeffect %}
-                    <div class="col-3 col-lg-3 btn-tag {{ type.name }} p-1 mt-2 mx-1" style="margin-right: 1em; text-align: center;"><span style="text-transform: capitalize;">{{ type.name }}</span> <b>x{{ type.multiple }}</b></div>
+                    <div class="col-3 col-lg-3 btn-tag {{ type.name }} p-1 mt-2 mx-1" style="margin-right: 1em; text-align: center;"><span style="text-transform: capitalize;">{{ type.name }}</span></div>
                 {% endfor %}
             </div>
 

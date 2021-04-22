@@ -103,7 +103,7 @@ def set_mon_data(data, mon):
     # Abilities
     for ability in mon.abilities:
         ab = pb.ability(ability.ability.name)
-        short_desc = ab.effect_entries[0].short_effect
+        short_desc = ""
         for entry in ab.effect_entries:
             if entry.language.name == "en":
                 short_desc = entry.short_effect
@@ -135,18 +135,21 @@ def get_rgb_color(base_hue):
 with open('C:/Users/inmor/Desktop/data.json', 'w') as outfile:
     api_data = (requests.get("https://pokeapi.co/api/v2/pokemon?offset=0&limit=9999")).json()
     
-    counter = 0
+    counter = 0  # Failed in 812
+    start_offset = 812  # By if it fails
     pbar = progressbar.ProgressBar(maxval=api_data['count'])
     pbar.start()
 
     for pokemon in api_data['results']:
-        mon = pb.pokemon(pokemon['name'])
-        set_mon_data(data, mon)
-        outfile.seek(0)
-        json.dump(data, outfile)
+        if counter >= start_offset:
+            mon = pb.pokemon(pokemon['name'])
+            set_mon_data(data, mon)
+            outfile.seek(0)
+            json.dump(data, outfile)
 
         counter += 1
         pbar.update(counter)
+
     outfile.close()
 
     pbar.finish()
