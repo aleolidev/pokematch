@@ -19,7 +19,7 @@ def index(request):
 
 
     if request.method == "POST":
-        name_index = {mon["beauty_name"]: i for i, mon in enumerate(data)}
+        name_index = {mon["beauty_name"].replace('-', ' '): i for i, mon in enumerate(data)}
         
         # Process Player Mon POST
         player_mon_name = request.POST.get("playerMon", None)
